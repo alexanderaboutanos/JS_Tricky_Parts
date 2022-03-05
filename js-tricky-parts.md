@@ -285,3 +285,223 @@ Solution:
 0 && 1 = 0
 1 && 2 = 2
 ```
+
+18. What will be the output when the following code is executed? Explain.
+
+```
+console.log(false == '0')
+console.log(false === '0')
+```
+
+- `true` and `false`. double equal operator must agree in value only. triple equal operator must agree in type and value.
+
+19. What is the output out of the following code? Explain your answer.
+
+```
+var a={},
+    b={key:'b'},
+    c={key:'c'};
+
+a[b]=123;
+a[c]=456;
+
+console.log(a[b]);
+```
+
+- 456 (not 123).
+- Javascript automatically turns parameters into strings when setting an object property.
+
+20. What will the following code output to the console:
+
+```
+console.log((function f(n){return ((n > 1) ? n * f(n-1) : n)})(10));
+```
+
+- 10!
+
+21. Consider the code snippet below. What will the console output be and why?
+
+```
+(function(x) {
+    return (function(y) {
+        console.log(x);
+    })(2)
+})(1);
+```
+
+- 1 because of closure.
+
+22. What will the following code output to the console and why:
+
+```
+var hero = {
+    _name: 'John Doe',
+    getSecretIdentity: function (){
+        return this._name;
+    }
+};
+
+var stoleSecretIdentity = hero.getSecretIdentity;
+
+console.log(stoleSecretIdentity());
+console.log(hero.getSecretIdentity());
+```
+
+- `undefined` and `John Doe`. this.\_name is called in the global scope, which does not know the \_name variable.
+
+23. Create a function that, given a DOM Element on the page, will visit the element itself and all of its descendents (not just its immediate children). For each element visited, the function should pass that element to a provided callback function.
+
+The arguments to the function should be:
+
+a DOM element
+a callback function (that takes a DOM element as its argument)
+
+-
+
+```function Traverse(p_element,p_callback) {
+   p_callback(p_element);
+   var list = p_element.children;
+   for (var i = 0; i < list.length; i++) {
+       Traverse(list[i],p_callback);  // recursive call
+   }
+}
+```
+
+24. Testing your this knowledge in JavaScript: What is the output of the following code?
+
+```
+var length = 10;
+function fn() {
+	console.log(this.length);
+}
+
+var obj = {
+  length: 5,
+  method: function(fn) {
+    fn();
+    arguments[0]();
+  }
+};
+
+obj.method(fn, 1);
+```
+
+- 10, 2.
+
+25. Consider the following code. What will the output be, and why?
+
+```
+(function () {
+    try {
+        throw new Error();
+    } catch (x) {
+        var x = 1, y = 2;
+        console.log(x);
+    }
+    console.log(x);
+    console.log(y);
+})();
+```
+
+- 1, undefined, 2.
+
+26. What will be the output of this code?
+
+```
+var x = 21;
+var girl = function () {
+    console.log(x);
+    var x = 20;
+};
+girl ();
+```
+
+- undefined.
+
+27. What will this code print?
+
+```
+for (let i = 0; i < 5; i++) {
+  setTimeout(function() { console.log(i); }, i * 1000 );
+}
+```
+
+- 0,1,2,3,4,5. We used let!
+
+28. What do the following lines output, and why?
+
+```
+console.log(1 < 2 < 3);
+console.log(3 > 2 > 1);
+```
+
+- true, false.
+
+29. How do you add an element at the begining of an array? How do you add one at the end?
+
+- myArray.push('end');
+  myArray.unshift('start');
+
+30. Imagine you have this code:
+
+`var a = [1, 2, 3];`
+a) Will this result in a crash?
+`a[10] = 99;`
+
+- no.
+
+  b) What will this output?
+  `console.log(a[6]);`
+
+- undefined
+
+31. What is the value of `typeof undefined == typeof NULL`
+
+- true
+
+32. What would following code return?
+
+`console.log(typeof typeof 1);`
+
+- string!
+
+33. What will be the output of the following code:
+
+```
+for (var i = 0; i < 5; i++) {
+	setTimeout(function() { console.log(i); }, i * 1000 );
+}
+```
+
+- 5555
+
+34. What is NaN? What is its type? How can you reliably test if a value is equal to NaN?
+
+    - It's type is `number`. use `isNan()`
+
+35. What will the following code output and why?
+
+```
+var b = 1;
+function outer(){
+   	var b = 2
+    function inner(){
+        b++;
+        var b = 3;
+        console.log(b)
+    }
+    inner();
+}
+outer();
+```
+
+- 3.
+
+36. Discuss possible ways to write a function isInteger(x) that determines if x is an integer.
+
+- `function isInteger(x) { return (x ^ 0) === x; }`
+
+37. How do you clone an object?
+
+- var obj = {a: 1 ,b: 2}
+  var objclone = Object.assign({},obj);
